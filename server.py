@@ -22,6 +22,10 @@ def detect_emotion_route():
     # Call the packaged function
     result = emotion_detector(text_to_analyze)
 
+    # Handle blank input (dominant_emotion = None)
+    if result.get("dominant_emotion") is None:
+        return "Invalid text! Please try again!"
+
     # Format the output
     formatted = (
         f"For the given statement, the system response is "

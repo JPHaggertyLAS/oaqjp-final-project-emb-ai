@@ -25,7 +25,17 @@ def emotion_detector(text_to_analyze):
     # Convert JSON string to dictionary
     result = json.loads(response.text)
 
-    # Extract emotion scores
+     # Handle blank input → API returns status_code 400
+    if response.status_code == 400:
+        return {
+            "anger": None,
+            "disgust": None,
+            "fear": None,
+            "joy": None,
+            "sadness": None,
+            "dominant_emotion": None
+        }
+           # Extract emotion scores
     emotions = result["emotionPredictions"][0]["emotion"]
 
     # Determine dominant emotion
